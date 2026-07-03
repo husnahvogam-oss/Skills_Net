@@ -1,6 +1,8 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
+import DashboardLayout from '../components/layout/DashboardLayout'
 import Home from '../pages/Home'
 import Courses from '../pages/Courses'
 import CourseDetails from '../pages/CourseDetails'
@@ -11,11 +13,16 @@ import Signup from '../pages/Signup'
 import Profile from '../pages/Profile'
 import NotFound from '../pages/NotFound'
 import ProtectedRoute from './ProtectedRoute'
+import { useAuth } from '../hooks/useAuth'
+import DashboardHeader from '../components/layout/DashboardHeader'
 
 function AppRoutes() {
+  const location = useLocation()
+  const hideHeaderFooter = location.pathname === '/dashboard' || location.pathname === '/profile'
+
   return (
     <div className="min-h-screen bg-[#F6F3EC] text-[#10192B]">
-      <Navbar />
+      {!hideHeaderFooter && <Navbar />}
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -26,7 +33,10 @@ function AppRoutes() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <DashboardLayout>
+                  <DashboardHeader />
+                  <Dashboard />
+                </DashboardLayout>
               </ProtectedRoute>
             }
           />
@@ -34,7 +44,10 @@ function AppRoutes() {
             path="/profile"
             element={
               <ProtectedRoute>
-                <Profile />
+                <DashboardLayout>
+                  <DashboardHeader />
+                  <Profile />
+                </DashboardLayout>
               </ProtectedRoute>
             }
           />
