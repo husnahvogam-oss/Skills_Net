@@ -14,10 +14,10 @@ function Hero() {
             Discover curated courses, expert instructors, and practical projects designed to help you grow faster.
           </p>
           <div className="flex flex-wrap gap-4 pt-2">
-            <a href="/courses" className="btn btn-primary">
+            <a href="/courses" className="btn btn-primary bg-[#9C7A3C] border-[#9C7A3C] hover:bg-[#B08D4F]">
               Browse courses
             </a>
-            <a href="/about" className="btn btn-secondary">
+            <a href="/about" className="btn btn-secondary border-[#9C7A3C] text-[#9C7A3C] hover:bg-[#B08D4F] hover:text-white">
               Learn more
             </a>
           </div>
